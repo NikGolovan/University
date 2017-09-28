@@ -1,3 +1,11 @@
+/*
+*                                                       SUBJECT
+*
+* Write down a program that prints a multiplication table. 
+*
+*
+*/
+
 #include <iostream>
 using namespace std;
 
