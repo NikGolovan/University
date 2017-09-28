@@ -1,3 +1,11 @@
+/*
+*                                                       SUBJECT
+*
+* Write down a program that converts an integer from it's current base to a given base. 
+*
+*
+*/
+
 #include <iostream>
 using namespace std;
 
