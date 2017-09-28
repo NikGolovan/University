@@ -3,11 +3,11 @@
 *                                                       SUBJECT
 *
 * Write down a program that converts currency given in EUROS to an another one. Firstly, user types in the value in EUROS 
-* and afterwards user types a letter corresponding to a code of an another currency. The codes are: 
-* u for USD (US Dollar)
-* c for CAD (Canadian Dollar)
+* and afterwards user types a letter corresponding to a code of an another currency. The codes and changing rates are: 
+* u for USD (US Dollar). Change rate: 1.19978
+* c for CAD (Canadian Dollar) Change rate: 1.41748
 * The program will run until the user wont enter 0 as a value in EUROS and the q for the code. If user enters a code different 
-* to those of above, program will convert EUROS to FRF (French Francs). 
+* to those of above, program will convert EUROS to FRF (French Francs) with a change rate of 6.55957. 
 *
 *
 */
