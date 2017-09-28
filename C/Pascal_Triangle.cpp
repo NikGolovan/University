@@ -1,3 +1,10 @@
+/*
+*                                                       SUBJECT
+*
+* Write down a program that prints a Pascal Triangle. 
+*
+*/
+
 #include <iostream>
 using namespace std;
 
