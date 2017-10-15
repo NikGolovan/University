@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "methods.h"
+#include "callMethods.h"
 
 #define MAX_PLAYERS 10
 #define MAX_NAME_SIZE 15
@@ -23,7 +23,7 @@ int main() {
   /* reading and checking if the user input was digital
      if it wasn't, setting boolean isDigit to false */
   if (scanf("%d%*c", &numberOfPlayers) != 1)
-    isDigit = 0;
+   isDigit = 0;
 
   /* calling this method to verify if user input was correct
     (only digital) and passing boolean as an argument as well */
@@ -35,7 +35,7 @@ int main() {
   } else {
       for (i = 0; i < numberOfPlayers; i++) {
         printf("Give the %d player name: ", i+1);
-        scanf("%s%*c", &players[i]);
+        gets(players[i]);
       }
   }
 } while (numberOfPlayers > 10);
