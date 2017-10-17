@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /* method that verifies user's input */
-void verifyUserInput(int *numberOfPlayers, int isDigit) {
+void changeUserInput(int *numberOfPlayers, int isDigit) {
   if (isDigit == 0) {
     do {
       getchar(); // clearing the buffer
