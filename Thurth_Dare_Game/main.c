@@ -12,7 +12,6 @@ int main() {
   int incrementer = 0; /* allows to pass to the next player during game */
   int i = 0; /* serve for the "for" loop */
   int isDigit = 1; /* boolean checking user input, 0 = false, 1 = true */
-  char numberofPlayersChar[1] = {0}; /* serves to verify users input for amount of players. It is an array type to avoid certains bugs */
 
   /* BEGIN OF MENU LOOP "DO WHILE" */
   do {
