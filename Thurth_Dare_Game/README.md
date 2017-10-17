@@ -11,6 +11,6 @@
 
 **TO DO**
   
-- [x] Verify user input 
-- [ ] Fix bug with character input. Whenever user types > 1 character, the program bugs and prints several outputs instead of one. Concerned: "GAME LOOP" with `input` variable and `numberOfPlayers` variable. 
-- [ ] Open a pull request
+- [ ] Fix bug with character input. Whenever user types > 1 character, the program bugs and prints several outputs instead of one. Concerned: "GAME LOOP" with `input` variable and in "MENU LOOP" the `numberOfPlayers` variable. 
+- [ ] Fix bug when user writes for amount of players mixed type of data. For example, "1ds3". Program bugs and jumps directly to the "GAME LOOP".  
+
