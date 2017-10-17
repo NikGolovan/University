@@ -12,5 +12,5 @@
 **TO DO**
   
 - [ ] Fix bug with character input. Whenever user types > 1 character, the program bugs and prints several outputs instead of one. Concerned: "GAME LOOP" with `input` variable and in "MENU LOOP" the `numberOfPlayers` variable. 
-- [x] Fix bug when user writes for amount of players mixed type of data. For example, "1ds3". Program bugs and jumps directly to the "GAME LOOP".  
+- [ ] Fix bug when user writes for amount of players mixed type of data. For example, "1ds3". Program bugs and jumps directly to the "GAME LOOP".  
 - [ ] Fix empty line bug. When user writes for amount of players mixed type of data, for example, "1ds3" and presses enter, program shows blanc line and waits for user's input. As soon as something typed in, the program calls `verifyUserInput()` method. It should call `verifyUserInput()` method immediately without a blanc line for input. 
