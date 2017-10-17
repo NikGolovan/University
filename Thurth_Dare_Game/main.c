@@ -12,6 +12,7 @@ int main() {
   int incrementer = 0; /* allows to pass to the next player during game */
   int i = 0; /* serve for the "for" loop */
   int isDigit = 1; /* boolean checking user input, 0 = false, 1 = true */
+  char numberofPlayersChar[1] = {0}; /* serves to verify users input for amount of players. It is an array type to avoid certains bugs */
 
   /* BEGIN OF MENU LOOP "DO WHILE" */
   do {
@@ -20,14 +21,16 @@ int main() {
   printf("------------------\n");
   printf("Enter amount of players: ");
 
+  gets(numberofPlayersChar);
+    
   /* reading and checking if the user input was digital
      if it wasn't, setting boolean isDigit to false */
-  if (scanf("%d%*c", &numberOfPlayers) != 1)
-   isDigit = 0;
+  if (!isdigit(numberofPlayersChar[0]) || !isdigit(numberofPlayersChar[1]))
+      isDigit = 0;
 
-  /* calling this method to verify if user input was correct
-    (only digital) and passing boolean as an argument as well */
-  verifyUserInput(&numberOfPlayers, isDigit);
+  /* calling this method only if isDigit is equals to false = 0 */
+  if (isDigit == 0)
+    changeUserInput(&numberOfPlayers, isDigit);
 
   /* adding new players to the game */
   if (numberOfPlayers > 10) {
