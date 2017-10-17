@@ -6,7 +6,7 @@
 
 int main() {
   char players[MAX_PLAYERS][MAX_NAME_SIZE] = {{0}}; /* char array contains players */
-  char playerName = 0; /* assigns a name to a player */
+  char playerName[MAX_NAME_SIZE] = {0}; /* assigns a name to a player */
   int numberOfPlayers = 0; /* total number of players playing the game */
   char input = 0; /* user input for t (truth) and d (dare) */
   int incrementer = 0; /* allows to pass to the next player during game */
@@ -21,16 +21,14 @@ int main() {
   printf("------------------\n");
   printf("Enter amount of players: ");
 
-  gets(numberofPlayersChar);
-    
   /* reading and checking if the user input was digital
      if it wasn't, setting boolean isDigit to false */
-  if (!isdigit(numberofPlayersChar[0]) || !isdigit(numberofPlayersChar[1]))
-      isDigit = 0;
+  if (scanf("%d%*c", &numberOfPlayers) != 1)
+   isDigit = 0;
 
-  /* calling this method only if isDigit is equals to false = 0 */
-  if (isDigit == 0)
-    changeUserInput(&numberOfPlayers, isDigit);
+  /* calling this method to verify if user input was correct
+    (only digital) and passing boolean as an argument as well */
+  verifyUserInput(&numberOfPlayers, isDigit);
 
   /* adding new players to the game */
   if (numberOfPlayers > 10) {
