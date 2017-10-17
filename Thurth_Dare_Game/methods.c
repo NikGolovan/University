@@ -16,8 +16,8 @@ void verifyUserInput(int *numberOfPlayers, int isDigit) {
 /* method that gets random truth question */
 void randomThruth(void) {
   int randomnumber;
-  char arrayTruth[5][150] = {{"Truth 1"}, {"Truth 2"},
-                            {"Truth 3"}, {"Truth 4"}, {"Truth 5"}};
+  char arrayTruth[5][150] = {{"Random Truth 1"}, {"Random Truth 2"},
+                            {"Random Truth 3"}, {"Random Truth 4"}, {"Random Truth 5"}};
 
   srand(time(NULL));
 
@@ -30,8 +30,8 @@ void randomThruth(void) {
 /* method that gets random dare */
 void randomDare(void) {
   int randomnumber;
-  char arrayTruth[5][150] = {{"Dare 1"}, {"Dare 2"},
-                            {"Dare 3"}, {"Dare 4"}, {"Dare 5"}};
+  char arrayTruth[5][150] = {{"Random Dare 1"}, {"Random Dare 2"},
+                            {"Random Dare 3"}, {"Random Dare 4"}, {"Random Dare 5"}};
 
   srand(time(NULL));
 
