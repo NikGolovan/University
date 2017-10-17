@@ -6,8 +6,8 @@
   
   **ISSUES**
   
-  [x] - done
-  [ ] - open
+ - [x] - done
+ - [ ] - open
   
 - [x] Verify user input on character
 - [ ] Push my commits to GitHub
