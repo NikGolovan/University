@@ -2,7 +2,7 @@
 #define METHODS_H
 #include "methods.c"
 
-void verifyUserInput(int *numberOfPlayers, int isDigit);
+void changeUserInput(int *numberOfPlayers, int isDigit);
 void randomThruth();
 void randomDare();
 
