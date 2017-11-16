@@ -158,7 +158,8 @@ void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
   Alerte *tmp;
 
   printf("Donnez le code d'alerte pour la suppression :\n");
-
+  scanf("%d%*c", &iCodeDonne);
+  
   for (i = 0; i < *compteurAlerte; i++) {
     if (iCodeDonne != (*alerte)[i].iCode) {
       printf("Alerte avec le code %d n'a pas ete trouvee.\n", iCodeDonne);
