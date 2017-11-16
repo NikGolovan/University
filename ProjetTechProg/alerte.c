@@ -4,14 +4,51 @@
 
 #include "alerte.h"
 
-char * typeAlerte() {
-  char *chaine;
+char * niveauAlerte() {
+  char *niveau;
   int choix = 0;
 
-  chaine = malloc(21 * sizeof(char));
+  niveau = malloc(21 * sizeof(char));
 
-  if (chaine == NULL)
-    printf("Chaine is NULL\n");
+  if (niveau == NULL) {
+    printf("Erreur d'allocation memoire pour le niveau d'alerte\n");
+    return;
+  }
+
+  printf("1. NOMINAL\n");
+  printf("1. URGENT\n");
+  printf("1. URGENCE ABSOLUE\n");
+
+  scanf("%d%*c", &choix);
+
+  switch (choix) {
+    case 1:
+      niveau = "NOMINAL";
+      break;
+    case 2:
+      niveau = "URGENT";
+      break;
+    case 3:
+      niveau = "URGENCE ABSOLUE";
+      break;
+    default:
+      printf("La saisie n'est pas correcte.\n");
+  }
+  return niveau;
+  free(niveau);
+  printf("DEBUG: niveau :%s\n", niveau);
+}
+
+char * typeAlerte() {
+  char *type;
+  int choix = 0;
+
+  type = malloc(21 * sizeof(char));
+
+  if (type == NULL) {
+    printf("Erreur d'allocation memoire pour le type d'alerte\n");
+    return;
+  }
 
   printf("1. INCENDIE\n");
   printf("2. ACCIDENT ROUTE\n");
@@ -25,12 +62,32 @@ char * typeAlerte() {
 
   switch (choix) {
     case 1:
-      chaine = "INCENDIE\n";
+      type = "INCENDIE\n";
       break;
+    case 2:
+      type = "ACCIDENT ROUTE";
+      break;
+    case 3:
+      type = "ACCIDENT MER";
+      break;
+    case 4:
+      type = "ACCIDENT MONTAGNE";
+      break;
+    case 5:
+      type = "MALAISE";
+      break;
+    case 6:
+     type = "EXPLOSION";
+     break;
+    case 7:
+      type = "ACCIDENT DE LA VIE";
+      break;
+    default:
+      printf("La saisie n'est pas correcte.\n");
   }
-  return(chaine);
-  free(chaine);
-  printf("DEBUG: chaine : %s\n", chaine);
+  return(type);
+  free(type);
+  printf("DEBUG: chaine : %s\n", type);
 }
 
 void ajouterAlerte(Alerte **alerte, int *compteurAlerte) {
