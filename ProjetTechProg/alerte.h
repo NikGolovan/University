@@ -22,7 +22,7 @@ void ajouterAlerte(Alerte **alerte, int *compteurAlerte);
 void afficherUneAlerte(Alerte alerte);
 void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte);
 void modifierAlerte(Alerte alerte);
-void supprimerAlerte(Alerte **alerte);
+void supprimerAlerte(Alerte **alerte, int *compteurAlerte);
 //void typeAlerte(Alerte alerte, int *compteurAlerte);
 //void niveauAlerte(Alerte alerte, int *compteurAlerte);
 char * typeAlerte();
