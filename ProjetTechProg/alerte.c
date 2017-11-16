@@ -93,7 +93,8 @@ char * typeAlerte() {
 void ajouterAlerte(Alerte **alerte, int *compteurAlerte) {
   char tmpChaine[LIEU_TAILLE];
   int tmpNombre = 0;
-  char *tmp;
+  char *ptrType;
+  char *ptrNiveau;
   int i;
 
   i = *compteurAlerte;
@@ -105,13 +106,14 @@ void ajouterAlerte(Alerte **alerte, int *compteurAlerte) {
   printf("Type d'alerte :\n");
   //fgets(tmpChaine, LIEU_TAILLE, stdin);
   //scanf("%s%*c", tmpChaine);
-  tmp = typeAlerte();
-  strcpy((*alerte)[i].cType, tmp);
+  ptrType = typeAlerte();
+  strcpy((*alerte)[i].cType, ptrType);
 
   printf("Niveau d'alerte :\n");
-  fgets(tmpChaine, LIEU_TAILLE, stdin);
+  //fgets(tmpChaine, LIEU_TAILLE, stdin);
   //scanf("%s%*c", tmpChaine);
-  strcpy((*alerte)[i].cNiveau, tmpChaine);
+  ptrNiveau = niveauAlerte();
+  strcpy((*alerte)[i].cNiveau, ptrNiveau);
 
   printf("Lieu :\n");
   fgets(tmpChaine, LIEU_TAILLE, stdin);
