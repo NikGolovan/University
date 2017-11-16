@@ -16,8 +16,8 @@ char * niveauAlerte() {
   }
 
   printf("1. NOMINAL\n");
-  printf("1. URGENT\n");
-  printf("1. URGENCE ABSOLUE\n");
+  printf("2. URGENT\n");
+  printf("3. URGENCE ABSOLUE\n");
 
   scanf("%d%*c", &choix);
 
