@@ -24,7 +24,8 @@ void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte);
 void modifierAlerte(Alerte alerte);
 void supprimerAlerte(Alerte alerte);
 //void typeAlerte(Alerte alerte, int *compteurAlerte);
-void niveauAlerte(Alerte alerte, int *compteurAlerte);
+//void niveauAlerte(Alerte alerte, int *compteurAlerte);
 char * typeAlerte();
+char * niveauAlerte();
 
 #endif
