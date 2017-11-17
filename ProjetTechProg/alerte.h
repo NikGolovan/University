@@ -6,7 +6,7 @@
 #define DESCRIPTION_TAILLE 150
 #define TAILLE_TYPE 21
 #define TAILLE_NIVEAU 21
-#define TAILLE_INITIALE_DE_MALLOC 2
+#define TAILLE_INITIALE_DE_MALLOC 3
 #define TAILLE_BUFFER 21
 
 
@@ -24,10 +24,8 @@ void afficherUneAlerte(Alerte **alerte, int *compteurAlerte);
 void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte);
 void modifierAlerte(Alerte **alerte, int *compteurAlerte);
 void supprimerAlerte(Alerte **alerte, int *compteurAlerte);
-//void typeAlerte(Alerte alerte, int *compteurAlerte);
-//void niveauAlerte(Alerte alerte, int *compteurAlerte);
 char * typeAlerte();
 char * niveauAlerte();
-int genererCodeAlerte();
+int genererCodeAlerte(/*Alerte **alerte, int *compteurAlerte*/);
 
 #endif
