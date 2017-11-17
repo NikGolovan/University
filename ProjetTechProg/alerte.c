@@ -141,10 +141,7 @@ void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte) {
 
    if (*compteurAlerte == 0) {
     printf("Aucune alerte n'a été enregistrée\n");
-    return;  char tmpChaine[LIEU_TAILLE];
-  int tmpNombre = 0;
-  char *ptrType = NULL;
-  char *ptrNiveau = NULL;
+    return;
   }
 
    for (i = 0; i < *compteurAlerte; i++) {
@@ -171,20 +168,17 @@ void afficherUneAlerte(Alerte **alerte, int *compteurAlerte) {
   printf("Donnez le code d'alerete :\n");
   scanf("%d%*c", &iCodeDonne);
 
-
   for (i = 0; i < (*compteurAlerte); i++) {
-    if (iCodeDonne != (*alerte)[i].iCode) {
-      printf("Alerte avec le code %d n'a pas été trouvée\n", iCodeDonne);
-      return;
+    if (iCodeDonne == (*alerte)[i].iCode) {
+      printf("Code d'alerte : %d\n", (*alerte)[i].iCode);
+      printf("Type d'alerte : %s", (*alerte)[i].cType);
+      printf("Niveau d'alerte : %s", (*alerte)[i].cNiveau);
+      printf("Lieu : %s", (*alerte)[i].cLieu);
+      printf("Nombre de victimes : %d\n", (*alerte)[i].iNombreVictimes);
+      printf("Description : %s", (*alerte)[i].cDescription);
     }
-    printf("Code d'alerte : %d\n", (*alerte)[i].iCode);
-    printf("Type d'alerte : %s", (*alerte)[i].cType);
-    printf("Niveau d'alerte : %s", (*alerte)[i].cNiveau);
-    printf("Lieu : %s", (*alerte)[i].cLieu);
-    printf("Nombre de victimes : %d\n", (*alerte)[i].iNombreVictimes);
-    printf("Description : %s", (*alerte)[i].cDescription);
-
   }
+  /* TODO: Afficher message si alerte n'a pas été trouvée */
 }
 
 void modifierAlerte(Alerte **alerte, int *compteurAlerte) {
@@ -193,8 +187,6 @@ void modifierAlerte(Alerte **alerte, int *compteurAlerte) {
   int iCodeDonne = 0;
   char tmpChaine[LIEU_TAILLE];
   int tmpNombre = 0;
-  char *ptrType = NULL;
-  char *ptrNiveau = NULL;
 
    if (*compteurAlerte == 0) {
     printf("Aucune alerte n'a été enregistrée\n");
@@ -205,34 +197,31 @@ void modifierAlerte(Alerte **alerte, int *compteurAlerte) {
   scanf("%d%*c", &iCodeDonne);
 
    for (i = 0; i < *compteurAlerte; i++) {
-    if (iCodeDonne != (*alerte)[i].iCode) {
-      printf("Alerte avec le code %d n'a pas été trouvée\n", iCodeDonne);
-      return;
+    if (iCodeDonne == (*alerte)[i].iCode) {
+      printf("Code d'alerte à modifier: %d\n", (*alerte)[i].iCode);
+
+      printf("Type d'alerte :\n");
+      strcpy((*alerte)[i].cType, "Hello\n");
+
+      printf("Niveau d'alerte :\n");
+      strcpy((*alerte)[i].cNiveau, "Hello\n");
+
+      printf("Lieu :\n");
+      fgets(tmpChaine, LIEU_TAILLE, stdin);
+      strcpy((*alerte)[i].cLieu, tmpChaine);
+
+      printf("Nombre de victimes :\n");
+      scanf("%d%*c", &tmpNombre);
+      (*alerte)[i].iNombreVictimes = tmpNombre;
+
+      printf("Description :\n");
+      fgets(tmpChaine, LIEU_TAILLE, stdin);
+      strcpy((*alerte)[i].cDescription, tmpChaine);
     }
-    printf("Code d'alerte à modifier: %d\n", (*alerte)[i].iCode);
-
-    printf("Type d'alerte :\n");
-    strcpy((*alerte)[i].cType, "Hello\n");
-
-    printf("Niveau d'alerte :\n");
-    strcpy((*alerte)[i].cNiveau, "Hello\n");
-
-    printf("Lieu :\n");
-    fgets(tmpChaine, LIEU_TAILLE, stdin);
-    strcpy((*alerte)[i].cLieu, tmpChaine);
-
-    printf("Nombre de victimes :\n");
-    scanf("%d%*c", &tmpNombre);
-    (*alerte)[i].iNombreVictimes = tmpNombre;
-
-    printf("Description :\n");
-    fgets(tmpChaine, LIEU_TAILLE, stdin);
-    strcpy((*alerte)[i].cDescription, tmpChaine);
   }
   printf("Alerte avec le code %d a été bien modifié.\n", iCodeDonne);
 }
 
-/* TODO: la suppression marche proprement q'avec un seul élément */
 void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
   int iCodeDonne = 0;
   int i = 0;
@@ -245,18 +234,17 @@ void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
   printf("Donnez le code d'alerte pour la suppression :\n");
   scanf("%d%*c", &iCodeDonne);
 
-  for (i = 0; i < *compteurAlerte; i++) {
-    if (iCodeDonne != (*alerte)[i].iCode) {
-      printf("Alerte avec le code %d n'a pas été trouvée.\n", iCodeDonne);
-      return;
+  for (i = 0; i < (*compteurAlerte); i++) {
+    if (iCodeDonne == (*alerte)[i].iCode) {
+      printf("Code d'alerte : %d\n", (*alerte)[i].iCode);
+      printf("Type d'alerte : %s", (*alerte)[i].cType);
+      printf("Niveau d'alerte : %s", (*alerte)[i].cNiveau);
+      printf("Lieu : %s", (*alerte)[i].cLieu);
+      printf("Nombre de victimes : %d\n", (*alerte)[i].iNombreVictimes);
+      printf("Description : %s", (*alerte)[i].cDescription);
     }
-    (*alerte)[i].iCode = (*alerte)[i+1].iCode;
-    strcpy((*alerte)[i].cType, (*alerte)[i+1].cType);
-    strcpy((*alerte)[i].cNiveau, (*alerte)[i+1].cNiveau);
-    strcpy((*alerte)[i].cLieu, (*alerte)[i+1].cLieu);
-    (*alerte)[i].iNombreVictimes = (*alerte)[i+1].iNombreVictimes;
-    strcpy((*alerte)[i].cDescription, (*alerte)[i+1].cDescription);
   }
+  /* TODO: Afficher message si alerte n'a pas été trouvée */
 
   (*compteurAlerte)--;
 
