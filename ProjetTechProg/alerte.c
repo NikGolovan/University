@@ -20,7 +20,7 @@ char * niveauAlerte() {
 
   if (niveau == NULL) {
     printf("Erreur d'allocation memoire pour le niveau d'alerte\n");
-    return;
+    exit(EXIT_FAILURE);
   }
 
   printf("1. NOMINAL\n");
@@ -53,7 +53,7 @@ char * typeAlerte() {
 
   if (type == NULL) {
     printf("Erreur d'allocation memoire pour le type d'alerte\n");
-    return;
+    exit(EXIT_FAILURE);
   }
 
   printf("1. INCENDIE\n");
@@ -96,6 +96,7 @@ char * typeAlerte() {
 
 void ajouterAlerte(Alerte **alerte, int *compteurAlerte) {
   char tmpChaine[LIEU_TAILLE];
+  char sBuffer[TAILLE_BUFFER];
   int tmpNombre = 0;
   char *ptrType = NULL;
   char *ptrNiveau = NULL;
@@ -153,14 +154,16 @@ void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte) {
     printf("Lieu : %s", (*alerte)[i].cLieu);
     printf("Nombre de victimes : %d\n", (*alerte)[i].iNombreVictimes);
     printf("Description : %s", (*alerte)[i].cDescription);
+    printf("DEBUG: i = %d\n", i);
   }
 }
 
+/* TODO: la recherche affiche que le prèmier élément */
 void afficherUneAlerte(Alerte **alerte, int *compteurAlerte) {
   int i = 0;
   int iCodeDonne = 0;
 
-   if (*compteurAlerte == 0) {
+  if (*compteurAlerte == 0) {
     printf("Aucune alerte n'a été enregistrée\n");
     return;
   }
@@ -168,7 +171,8 @@ void afficherUneAlerte(Alerte **alerte, int *compteurAlerte) {
   printf("Donnez le code d'alerete :\n");
   scanf("%d%*c", &iCodeDonne);
 
-   for (i = 0; i < *compteurAlerte; i++) {
+
+  for (i = 0; i < (*compteurAlerte); i++) {
     if (iCodeDonne != (*alerte)[i].iCode) {
       printf("Alerte avec le code %d n'a pas été trouvée\n", iCodeDonne);
       return;
@@ -179,12 +183,13 @@ void afficherUneAlerte(Alerte **alerte, int *compteurAlerte) {
     printf("Lieu : %s", (*alerte)[i].cLieu);
     printf("Nombre de victimes : %d\n", (*alerte)[i].iNombreVictimes);
     printf("Description : %s", (*alerte)[i].cDescription);
-    break;
+
   }
 }
 
 void modifierAlerte(Alerte **alerte, int *compteurAlerte) {
   int i = 0;
+
   int iCodeDonne = 0;
   char tmpChaine[LIEU_TAILLE];
   int tmpNombre = 0;
@@ -227,33 +232,42 @@ void modifierAlerte(Alerte **alerte, int *compteurAlerte) {
   printf("Alerte avec le code %d a été bien modifié.\n", iCodeDonne);
 }
 
+/* TODO: la suppression marche proprement q'avec un seul élément */
 void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
   int iCodeDonne = 0;
   int i = 0;
-  Alerte *tmp;
+
+  if (*compteurAlerte == 0) {
+   printf("Aucune alerte n'a été enregistrée\n");
+   return;
+  }
+
   printf("Donnez le code d'alerte pour la suppression :\n");
   scanf("%d%*c", &iCodeDonne);
 
   for (i = 0; i < *compteurAlerte; i++) {
     if (iCodeDonne != (*alerte)[i].iCode) {
-      printf("Alerte avec le code %d n'a pas ete trouvee.\n", iCodeDonne);
+      printf("Alerte avec le code %d n'a pas été trouvée.\n", iCodeDonne);
       return;
     }
     (*alerte)[i].iCode = (*alerte)[i+1].iCode;
-    (*alerte)[i].cType = (*alerte)[i+1].cType;
-    (*alerte)[i].cNiveau = (*alerte)[i+1].cNiveau;
-    (*alerte)[i].cLieu = (*alerte)[i+1].cLieu;
+    strcpy((*alerte)[i].cType, (*alerte)[i+1].cType);
+    strcpy((*alerte)[i].cNiveau, (*alerte)[i+1].cNiveau);
+    strcpy((*alerte)[i].cLieu, (*alerte)[i+1].cLieu);
     (*alerte)[i].iNombreVictimes = (*alerte)[i+1].iNombreVictimes;
-    (*alerte)[i].cDescription = (*alerte)[i+1].cDescription;
+    strcpy((*alerte)[i].cDescription, (*alerte)[i+1].cDescription);
   }
 
-  tmp = realloc(*alerte, (*compteurAlerte - 1) * sizeof(Alerte));
+  (*compteurAlerte)--;
 
-  if (tmp == NULL) {
-    printf("Erreur de reallocation memoire apres la suppression.\n");
-    return(-1);
-  }
+  /* *alerte = realloc(*alerte, (*compteurAlerte * sizeof(Alerte)));
 
-  *compteurAlerte = *compteurAlerte - 1;
-  *alerte = tmp;
+  if (*alerte == NULL) {
+    printf("Erreur de reallocation memoire après la suppression.\n");
+    exit(EXIT_FAILURE);
+  } */
+
+  //printf("DEBUG: La mémoire a été realouée après la suppression\n");
+
+  printf("Alerte avec le code %d a été bien supprimé\n", iCodeDonne);
 }
