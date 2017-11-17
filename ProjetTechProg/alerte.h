@@ -6,7 +6,8 @@
 #define DESCRIPTION_TAILLE 150
 #define TAILLE_TYPE 21
 #define TAILLE_NIVEAU 21
-#define INITIAL_TAILLE_DE_MALLOC 1
+#define TAILLE_INITIALE_DE_MALLOC 2
+#define TAILLE_BUFFER 21
 
 
 typedef struct {
