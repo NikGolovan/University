@@ -19,13 +19,14 @@ typedef struct {
 } Alerte;
 
 void ajouterAlerte(Alerte **alerte, int *compteurAlerte);
-void afficherUneAlerte(Alerte alerte);
+void afficherUneAlerte(Alerte **alerte, int *compteurAlerte);
 void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte);
-void modifierAlerte(Alerte alerte);
+void modifierAlerte(Alerte **alerte, int *compteurAlerte);
 void supprimerAlerte(Alerte **alerte, int *compteurAlerte);
 //void typeAlerte(Alerte alerte, int *compteurAlerte);
 //void niveauAlerte(Alerte alerte, int *compteurAlerte);
 char * typeAlerte();
 char * niveauAlerte();
+int genererCodeAlerte();
 
 #endif
