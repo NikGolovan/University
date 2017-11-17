@@ -236,26 +236,26 @@ void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
 
   for (i = 0; i < (*compteurAlerte); i++) {
     if (iCodeDonne == (*alerte)[i].iCode) {
-      printf("Code d'alerte : %d\n", (*alerte)[i].iCode);
-      printf("Type d'alerte : %s", (*alerte)[i].cType);
-      printf("Niveau d'alerte : %s", (*alerte)[i].cNiveau);
-      printf("Lieu : %s", (*alerte)[i].cLieu);
-      printf("Nombre de victimes : %d\n", (*alerte)[i].iNombreVictimes);
-      printf("Description : %s", (*alerte)[i].cDescription);
+      (*alerte)[i].iCode = (*alerte)[i+1].iCode;
+      strcpy((*alerte)[i].cType, (*alerte)[i+1].cType);
+      strcpy((*alerte)[i].cNiveau, (*alerte)[i+1].cNiveau);
+      strcpy((*alerte)[i].cLieu, (*alerte)[i+1].cLieu);
+      (*alerte)[i].iNombreVictimes = (*alerte)[i+1].iNombreVictimes;
+      strcpy((*alerte)[i].cDescription, (*alerte)[i+1].cDescription);
     }
   }
   /* TODO: Afficher message si alerte n'a pas été trouvée */
 
   (*compteurAlerte)--;
 
-  /* *alerte = realloc(*alerte, (*compteurAlerte * sizeof(Alerte)));
+   *alerte = realloc(*alerte, (*compteurAlerte * sizeof(Alerte)));
 
   if (*alerte == NULL) {
     printf("Erreur de reallocation memoire après la suppression.\n");
     exit(EXIT_FAILURE);
-  } */
+  }
 
-  //printf("DEBUG: La mémoire a été realouée après la suppression\n");
+  printf("DEBUG: La mémoire a été realouée après la suppression\n");
 
   printf("Alerte avec le code %d a été bien supprimé\n", iCodeDonne);
 }
