@@ -8,7 +8,9 @@ int main(int argc, char const *argv[]) {
   int compteurAlerte = 0;
   Alerte *alerte = NULL;
 
-  alerte = malloc(2 * sizeof(Alerte));
+  srand(time(NULL));
+
+  alerte = malloc(TAILLE_INITIALE_DE_MALLOC * sizeof(Alerte));
 
   if (alerte == NULL) {
     printf("Erreur d'allocation mémoire\n");
@@ -31,13 +33,24 @@ int main(int argc, char const *argv[]) {
         ajouterAlerte(&alerte, &compteurAlerte);
         compteurAlerte++;
 
-        if (compteurAlerte >= 2) {
-          alerte = realloc(alerte, (sizeof(Alerte)));
+        if (compteurAlerte >= TAILLE_INITIALE_DE_MALLOC) {
+          alerte = realloc(alerte, (compteurAlerte * sizeof(Alerte)));
           printf("DEBUG: La mémoire a été realouée\n");
         }
+        printf("DEBUG: compteurAlerte après l'ajout : %d\n", compteurAlerte);
+        break;
+      case 2:
+        afficherUneAlerte(&alerte, &compteurAlerte);
         break;
       case 3:
         afficherToutesAlertes(&alerte, &compteurAlerte);
+        break;
+      case 4:
+        modifierAlerte(&alerte, &compteurAlerte);
+        break;
+      case 5:
+        supprimerAlerte(&alerte, &compteurAlerte);
+        printf("DEBUG: compteurAlerte après la suppression : %d\n", compteurAlerte);
         break;
       case -1:
         break;
@@ -47,7 +60,6 @@ int main(int argc, char const *argv[]) {
     }
 
   } while(choix != -1);
-
 
   return 0;
 }
