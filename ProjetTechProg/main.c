@@ -18,13 +18,25 @@ int main(int argc, char const *argv[]) {
   }
 
   do {
-    printf("1. Nouvelle alerte\n");
-    printf("2. Afficher une alerte\n");
-    printf("3. Afficher toutes les alertes\n");
-    printf("4. Modifier une alerte\n");
-    printf("5. Supprimer une alerte\n");
-    printf("------------------------------\n");
-    printf("-1 pour quitter\n");
+    printf("╔═══════════════════════════════════╗\n");
+    printf("║                                   ║\n");
+    printf("║            MENU ALERTE            ║\n");
+    printf("║                                   ║\n");
+    printf("╠════╦══════════════════════════════╣\n");
+    printf("║    ║                              ║\n");
+    printf("║ 1  ║ Créer une alerte             ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 2  ║ Afficher une alerte          ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 3  ║ Afficher toutes les alertes  ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 4  ║ Modifier une alerte          ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 5  ║ Supprimer une alerte         ║\n");
+    printf("║    ║                              ║\n");
+    printf("╠════╬══════════════════════════════╣\n");
+    printf("║ -1 ║ Quitter                      ║\n");
+    printf("╚════╩══════════════════════════════╝\n");
 
     scanf("%d%*c", &choix);
 
@@ -55,7 +67,7 @@ int main(int argc, char const *argv[]) {
       case -1:
         break;
       default:
-        printf("La saisie n'est pas correcte\n");
+        printf("La saisie n'est pas correcte.\n");
         break;
     }
 
