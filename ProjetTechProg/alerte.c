@@ -26,7 +26,7 @@ int genererCodeAlerte(/* Alerte **alerte, int *compteurAlerte */) {
 }
 
 char * niveauAlerte() {
-  char *niveau;  srand(time(NULL));
+  char *niveau;
   int choix = 0;
 
   niveau = malloc(21 * sizeof(char));
@@ -36,35 +36,39 @@ char * niveauAlerte() {
     exit(EXIT_FAILURE);
   }
 
-  printf("╔═══════════════════════════════════╗\n");
-  printf("║                                   ║\n");
-  printf("║           NIVEAU ALERTE           ║\n");
-  printf("║                                   ║\n");
-  printf("╠════╦══════════════════════════════╣\n");
-  printf("║    ║                              ║\n");
-  printf("║ 1  ║ NOMINAL                      ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 2  ║ URGENT                       ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 3  ║ URGENCE ABSOLUE              ║\n");
-  printf("║    ║                              ║\n");
-  printf("╚════╩══════════════════════════════╝\n");
+  do {
+    printf("╔═══════════════════════════════════╗\n");
+    printf("║                                   ║\n");
+    printf("║           NIVEAU ALERTE           ║\n");
+    printf("║                                   ║\n");
+    printf("╠════╦══════════════════════════════╣\n");
+    printf("║    ║                              ║\n");
+    printf("║ 1  ║ NOMINAL                      ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 2  ║ URGENT                       ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 3  ║ URGENCE ABSOLUE              ║\n");
+    printf("║    ║                              ║\n");
+    printf("╚════╩══════════════════════════════╝\n");
 
-  scanf("%d%*c", &choix);
+    scanf("%d%*c", &choix);
 
-  switch (choix) {
-    case 1:
-      niveau = "NOMINAL\n";
-      break;
-    case 2:
-      niveau = "URGENT\n";
-      break;
-    case 3:
-      niveau = "URGENCE ABSOLUE\n";
-      break;
-    default:
-      printf("La saisie n'est pas correcte.\n");
-  }
+    switch (choix) {
+      case 1:
+        niveau = "NOMINAL\n";
+        break;
+      case 2:
+        niveau = "URGENT\n";
+        break;
+        case 3:
+        niveau = "URGENCE ABSOLUE\n";
+        break;
+        default:
+        printf("La saisie n'est pas correcte.\n");
+        break;
+    }
+  } while (choix > 3);
+
   return niveau;
 }
 
@@ -79,56 +83,60 @@ char * typeAlerte() {
     exit(EXIT_FAILURE);
   }
 
-  printf("╔═══════════════════════════════════╗\n");
-  printf("║                                   ║\n");
-  printf("║            TYPE ALERTE            ║\n");
-  printf("║                                   ║\n");
-  printf("╠════╦══════════════════════════════╣\n");
-  printf("║    ║                              ║\n");
-  printf("║ 1  ║ INCENDIE                     ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 2  ║ ACCIDENT DE LA ROUTE         ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 3  ║ ACCIDENT EN MER              ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 4  ║ ACCIDENT EN MONTAGNE         ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 5  ║ MALAISE                      ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 6  ║ EXPLOSION                    ║\n");
-  printf("║    ║                              ║\n");
-  printf("║ 7  ║ ACCIDENT DE LA VIE           ║\n");
-  printf("║    ║                              ║\n");
-  printf("╚════╩══════════════════════════════╝\n");
+  do {
+    printf("╔═══════════════════════════════════╗\n");
+    printf("║                                   ║\n");
+    printf("║            TYPE ALERTE            ║\n");
+    printf("║                                   ║\n");
+    printf("╠════╦══════════════════════════════╣\n");
+    printf("║    ║                              ║\n");
+    printf("║ 1  ║ INCENDIE                     ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 2  ║ ACCIDENT DE LA ROUTE         ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 3  ║ ACCIDENT EN MER              ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 4  ║ ACCIDENT EN MONTAGNE         ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 5  ║ MALAISE                      ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 6  ║ EXPLOSION                    ║\n");
+    printf("║    ║                              ║\n");
+    printf("║ 7  ║ ACCIDENT DE LA VIE           ║\n");
+    printf("║    ║                              ║\n");
+    printf("╚════╩══════════════════════════════╝\n");
 
 
-  scanf("%d%*c", &choix);
+    scanf("%d%*c", &choix);
 
-  switch (choix) {
-    case 1:
-      type = "INCENDIE\n";
-      break;
-    case 2:
-      type = "ACCIDENT ROUTE\n";
-      break;
-    case 3:
-      type = "ACCIDENT MER\n";
-      break;
-    case 4:
-      type = "ACCIDENT MONTAGNE\n";
-      break;
-    case 5:
-      type = "MALAISE\n";
-      break;
-    case 6:
-     type = "EXPLOSION\n";
-     break;
-    case 7:
-      type = "ACCIDENT DE LA VIE\n";
-      break;
-    default:
-      printf("La saisie n'est pas correcte.\n");
-  }
+    switch (choix) {
+      case 1:
+        type = "INCENDIE\n";
+        break;
+      case 2:
+        type = "ACCIDENT ROUTE\n";
+        break;
+      case 3:
+        type = "ACCIDENT MER\n";
+        break;
+      case 4:
+        type = "ACCIDENT MONTAGNE\n";
+        break;
+      case 5:
+        type = "MALAISE\n";
+        break;
+      case 6:
+       type = "EXPLOSION\n";
+       break;
+      case 7:
+        type = "ACCIDENT DE LA VIE\n";
+        break;
+      default:
+        printf("La saisie n'est pas correcte.\n");
+        break;
+    }
+  } while (choix > 7);
+
   return(type);
 }
 
