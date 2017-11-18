@@ -9,6 +9,10 @@
 #define TAILLE_INITIALE_DE_MALLOC 3
 #define TAILLE_BUFFER 21
 
+#define TAILLE_MOYEN_DEPLACEMENT 21
+#define TAILLE_NIVEAU_DISPONIBILITE 21
+#define TAILLE_STATUT 21
+#define TAILLE_BASE 50
 
 typedef struct {
   int iCode;
@@ -27,5 +31,25 @@ void supprimerAlerte(Alerte **alerte, int *compteurAlerte);
 char * typeAlerte();
 char * niveauAlerte();
 int genererCodeAlerte(/*Alerte **alerte, int *compteurAlerte*/);
+
+
+typedef struct {
+  int iCode;
+  char cNom;
+  char cMoyenDeplacement[TAILLE_MOYEN_DEPLACEMENT];
+  char cNiveauDisponibilite[TAILLE_NIVEAU_DISPONIBILITE];
+  char cStatut[TAILLE_STATUT];
+  char cBase[TAILLE_BASE];
+} Unites;
+
+void creerUnite(Unites **unite, int *compteurUnite);
+void afficherUneUnite(Unites **unite, int *compteurUnite);
+void afficherToutesUnites(Unites **unite, int *compteurUnite);
+void modifierUnite(Unites **unite, int *compteurUnite);
+void supprimerUnite(Unites **unite, int *compteurUnite);
+char * moyenDeplacement();
+char * niveauDisponibilite();
+char * statutUnite();
+int genererCodeUnite(/*Unites **unite, int *compteurUnite*/);
 
 #endif
