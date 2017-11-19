@@ -27,3 +27,4 @@ void typeAlerte(Alerte alerte, int *compteurAlerte);
 void niveauAlerte(Alerte alerte, int *compteurAlerte);
 
 #endif
+s
