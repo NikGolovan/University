@@ -2,36 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <stdlib.h>
 
 #include "alerte.h"
 
-int genererCodeAlerte(/* Alerte **alerte, int *compteurAlerte */) {
-  int nombreGenere = 0;
-  int existeAlerte = 0;
+int genererCodeAlerte(/* Alerte **alerte, int *iCompteurAlerte */) {
+  int iNombreGenere = 0;
+  //int iExisteAlerte = 0;
   // int i = 0;
 
-  nombreGenere = rand() % 50001;
+  iNombreGenere = rand() % 50001;
 
   /* do {
     nombreGenere = rand() % 3;
-    for (i = 0; i < (*compteurAlerte); i++) {
+    for (i = 0; i < (*iCompteurAlerte); i++) {
       if (nombreGenere == (*alerte)[i].iCode) {
         existeAlerte = 1;
       }
     }
   }while (existeAlerte); */
 
-  return nombreGenere;
+  return iNombreGenere;
 }
 
 char * niveauAlerte() {
-  char *niveau = NULL;
-  int choix = 0;
+  char *cPtrNiveau = NULL;
+  int iChoix = 0;
 
-  niveau = malloc(21 * sizeof(char));
+  cPtrNiveau = malloc(TAILLE_INITIALE_DE_MALLOC_ALERTE * sizeof(char));
 
-  if (niveau == NULL) {
+  if (cPtrNiveau == NULL) {
     printf("Erreur d'allocation memoire pour le niveau d'alerte\n");
     exit(EXIT_FAILURE);
   }
@@ -51,34 +50,34 @@ char * niveauAlerte() {
     printf("║    ║                              ║\n");
     printf("╚════╩══════════════════════════════╝\n");
 
-    scanf("%d%*c", &choix);
+    scanf("%d%*c", &iChoix);
 
-    switch (choix) {
+    switch (iChoix) {
       case 1:
-        niveau = "NOMINAL\n";
+        cPtrNiveau = "NOMINAL\n";
         break;
       case 2:
-        niveau = "URGENT\n";
+        cPtrNiveau = "URGENT\n";
         break;
         case 3:
-        niveau = "URGENCE ABSOLUE\n";
+        cPtrNiveau = "URGENCE ABSOLUE\n";
         break;
         default:
         printf("La saisie n'est pas correcte.\n");
         break;
     }
-  } while (choix > 3);
+  } while (iChoix > 3);
 
-  return niveau;
+  return cPtrNiveau;
 }
 
 char * typeAlerte() {
-  char *type = NULL;
-  int choix = 0;
+  char *cPtrType = NULL;
+  int iChoix = 0;
 
-  type = malloc(21 * sizeof(char));
+  cPtrType = malloc(TAILLE_INITIALE_DE_MALLOC_ALERTE * sizeof(char));
 
-  if (type == NULL) {
+  if (cPtrType == NULL) {
     printf("Erreur d'allocation memoire pour le type d'alerte\n");
     exit(EXIT_FAILURE);
   }
@@ -107,92 +106,91 @@ char * typeAlerte() {
     printf("╚════╩══════════════════════════════╝\n");
 
 
-    scanf("%d%*c", &choix);
+    scanf("%d%*c", &iChoix);
 
-    switch (choix) {
+    switch (iChoix) {
       case 1:
-        type = "INCENDIE\n";
+        cPtrType = "INCENDIE\n";
         break;
       case 2:
-        type = "ACCIDENT ROUTE\n";
+        cPtrType = "ACCIDENT ROUTE\n";
         break;
       case 3:
-        type = "ACCIDENT MER\n";
+        cPtrType = "ACCIDENT MER\n";
         break;
       case 4:
-        type = "ACCIDENT MONTAGNE\n";
+        cPtrType = "ACCIDENT MONTAGNE\n";
         break;
       case 5:
-        type = "MALAISE\n";
+        cPtrType = "MALAISE\n";
         break;
       case 6:
-       type = "EXPLOSION\n";
-       break;
+        cPtrType = "EXPLOSION\n";
+        break;
       case 7:
-        type = "ACCIDENT DE LA VIE\n";
+        cPtrType = "ACCIDENT DE LA VIE\n";
         break;
       default:
         printf("La saisie n'est pas correcte.\n");
         break;
     }
-  } while (choix > 7);
+  } while (iChoix > 7);
 
-  return(type);
+  return(cPtrType);
 }
 
-void ajouterAlerte(Alerte **alerte, int *compteurAlerte) {
-  char tmpChaine[LIEU_TAILLE];
+void ajouterAlerte(Alerte **alerte, int *iCompteurAlerte) {
   char sBuffer[TAILLE_BUFFER];
-  int tmpNombre = 0;
-  char *ptrType = NULL;
-  char *ptrNiveau = NULL;
+  int iTmpNombre = 0;
+  char *cPtrType = NULL;
+  char *cPtrNiveau = NULL;
   int i;
 
-  i = *compteurAlerte;
+  i = *iCompteurAlerte;
 
   printf("Code d'alerte :\n");
   //scanf("%d%*c", &tmpNombre);
-  tmpNombre = genererCodeAlerte();
-  (*alerte)[i].iCode = tmpNombre;
+  iTmpNombre = genererCodeAlerte();
+  (*alerte)[i].iCode = iTmpNombre;
 
   printf("Type d'alerte :\n");
   //fgets(tmpChaine, LIEU_TAILLE, stdin);
   //scanf("%s%*c", tmpChaine);
-  ptrType = typeAlerte();
-  strcpy((*alerte)[i].cType, ptrType);
+  cPtrType = typeAlerte();
+  strcpy((*alerte)[i].cType, cPtrType);
 
   printf("Niveau d'alerte :\n");
   //fgets(tmpChaine, LIEU_TAILLE, stdin);
   //scanf("%s%*c", tmpChaine);
-  ptrNiveau = niveauAlerte();
-  strcpy((*alerte)[i].cNiveau, ptrNiveau);
+  cPtrNiveau = niveauAlerte();
+  strcpy((*alerte)[i].cNiveau, cPtrNiveau);
 
   printf("Lieu :\n");
-  fgets(tmpChaine, LIEU_TAILLE, stdin);
+  fgets(sBuffer, TAILLE_BUFFER, stdin);
   //scanf("%s%*c", tmpChaine);
-  strcpy((*alerte)[i].cLieu, tmpChaine);
+  strcpy((*alerte)[i].cLieu, sBuffer);
 
   printf("Nombre de victimes :\n");
-  scanf("%d%*c", &tmpNombre);
-  (*alerte)[i].iNombreVictimes = tmpNombre;
+  scanf("%d%*c", &iTmpNombre);
+  (*alerte)[i].iNombreVictimes = iTmpNombre;
 
-  printf("Description :\n");      //scanf("%s%*c", tmpChaine);
-  fgets(tmpChaine, LIEU_TAILLE, stdin);
+  printf("Description :\n");
+  fgets(sBuffer, TAILLE_BUFFER, stdin);
   //scanf("%s%*c", tmpChaine);
-  strcpy((*alerte)[i].cDescription, tmpChaine);
+  strcpy((*alerte)[i].cDescription, sBuffer);
 
   printf("Alerte a été bien crée avec le code suivant : %d\n", (*alerte)[i].iCode);
 }
 
-void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte) {
+void afficherToutesAlertes(Alerte **alerte, int *iCompteurAlerte) {
   int i = 0;
 
-   if (*compteurAlerte == 0) {
+   if (*iCompteurAlerte == 0) {
     printf("Aucune alerte n'a été enregistrée\n");
     return;
   }
 
-   for (i = 0; i < *compteurAlerte; i++) {
+   for (i = 0; i < *iCompteurAlerte; i++) {
     printf("\n");
     printf("Code d'alerte : %d\n", (*alerte)[i].iCode);
     printf("Type d'alerte : %s", (*alerte)[i].cType);
@@ -205,12 +203,12 @@ void afficherToutesAlertes(Alerte **alerte, int *compteurAlerte) {
   }
 }
 
-void afficherUneAlerte(Alerte **alerte, int *compteurAlerte) {
+void afficherUneAlerte(Alerte **alerte, int *iCompteurAlerte) {
   int i = 0;
   int iCodeDonne = 0;
   int existeAlerte = 0;
 
-  if (*compteurAlerte == 0) {
+  if (*iCompteurAlerte == 0) {
     printf("Aucune alerte n'a été enregistrée\n");
     return;
   }
@@ -218,7 +216,7 @@ void afficherUneAlerte(Alerte **alerte, int *compteurAlerte) {
   printf("Donnez le code d'alerte :\n");
   scanf("%d%*c", &iCodeDonne);
 
-  for (i = 0; i < (*compteurAlerte); i++) {
+  for (i = 0; i < (*iCompteurAlerte); i++) {
     if (iCodeDonne == (*alerte)[i].iCode) {
       printf("\n");
       printf("Code d'alerte : %d\n", (*alerte)[i].iCode);
@@ -234,65 +232,63 @@ void afficherUneAlerte(Alerte **alerte, int *compteurAlerte) {
     printf("Alerte avec le code %d n'a pas été trouvée.\n", iCodeDonne);
 }
 
-void modifierAlerte(Alerte **alerte, int *compteurAlerte) {
+void modifierAlerte(Alerte **alerte, int *iCompteurAlerte) {
   int i = 0;
-  int existeAlerte = 0;
-  char *ptrType = NULL;
-  char *ptrNiveau = NULL;
-
+  int iExisteAlerte = 0;
+  char *cPtrType = NULL;
+  char *cPtrNiveau = NULL;
   int iCodeDonne = 0;
-  char tmpChaine[LIEU_TAILLE];
-  int tmpNombre = 0;
+  char sBuffer[TAILLE_BUFFER];
+  int iTmpNombre = 0;
 
-   if (*compteurAlerte == 0) {
+   if (*iCompteurAlerte == 0) {
     printf("Aucune alerte n'a été enregistrée\n");
     return;
   }
-//void typeAlerte(Alerte alerte, int *compteurAlerte);
-//void niveauAlerte(Alerte alerte, int *compteurAlerte);
+
   printf("Donnez le code d'alerte :\n");
   scanf("%d%*c", &iCodeDonne);
 
-   for (i = 0; i < *compteurAlerte; i++) {
+   for (i = 0; i < *iCompteurAlerte; i++) {
     if (iCodeDonne == (*alerte)[i].iCode) {
       printf("Code d'alerte à modifier: %d\n", (*alerte)[i].iCode);
 
       printf("Type d'alerte :\n");
-      ptrType = typeAlerte();
-      strcpy((*alerte)[i].cType, ptrType);
+      cPtrType = typeAlerte();
+      strcpy((*alerte)[i].cType, cPtrType);
 
       printf("Niveau d'alerte :\n");
-      ptrNiveau = niveauAlerte();
-      strcpy((*alerte)[i].cNiveau, ptrNiveau);
+      cPtrNiveau = niveauAlerte();
+      strcpy((*alerte)[i].cNiveau, cPtrNiveau);
 
       printf("Lieu :\n");
-      fgets(tmpChaine, LIEU_TAILLE, stdin);
-      strcpy((*alerte)[i].cLieu, tmpChaine);
+      fgets(sBuffer, TAILLE_BUFFER, stdin);
+      strcpy((*alerte)[i].cLieu, sBuffer);
 
       printf("Nombre de victimes :\n");
-      scanf("%d%*c", &tmpNombre);
-      (*alerte)[i].iNombreVictimes = tmpNombre;
+      scanf("%d%*c", &iTmpNombre);
+      (*alerte)[i].iNombreVictimes = iTmpNombre;
 
       printf("Description :\n");
-      fgets(tmpChaine, LIEU_TAILLE, stdin);
-      strcpy((*alerte)[i].cDescription, tmpChaine);
+      fgets(sBuffer, TAILLE_BUFFER, stdin);
+      strcpy((*alerte)[i].cDescription, sBuffer);
 
-      existeAlerte = 1;
+      iExisteAlerte = 1;
     }
   }
-  if (!existeAlerte) {
+  if (!iExisteAlerte) {
     printf("Alerte avec le code %d n'a pas été trouvée.\n", iCodeDonne);
   } else {
     printf("Alerte avec le code %d a été bien modifiée.\n", iCodeDonne);
   }
 }
 
-void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
+void supprimerAlerte(Alerte **alerte, int *iCompteurAlerte) {
   int iCodeDonne = 0;
   int i = 0;
   int j = 0;
 
-  if (*compteurAlerte == 0) {
+  if (*iCompteurAlerte == 0) {
    printf("Aucune alerte n'a été enregistrée\n");
    return;
   }
@@ -300,15 +296,15 @@ void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
   printf("Donnez le code d'alerte pour la suppression :\n");
   scanf("%d%*c", &iCodeDonne);
 
-  while (i < *compteurAlerte && iCodeDonne != (*alerte)[i].iCode) {
+  while (i < *iCompteurAlerte && iCodeDonne != (*alerte)[i].iCode) {
     i++;
   }
 
-  if (i == *compteurAlerte) {
+  if (i == *iCompteurAlerte) {
     printf("alerte n'a pas été trouvée.\n");
     return;
   } else {
-    for (j = i; j < (*compteurAlerte); j++) {
+    for (j = i; j < (*iCompteurAlerte); j++) {
         (*alerte)[j].iCode = (*alerte)[j+1].iCode;
         strcpy((*alerte)[j].cType, (*alerte)[j+1].cType);
         strcpy((*alerte)[j].cNiveau, (*alerte)[j+1].cNiveau);
@@ -318,11 +314,11 @@ void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
     }
   }
 
-  (*compteurAlerte)--;
+  (*iCompteurAlerte)--;
 
-  *alerte = realloc(*alerte, (*compteurAlerte * sizeof(Alerte)));
+  *alerte = realloc(*alerte, (*iCompteurAlerte * sizeof(Alerte)));
 
-  if (*alerte == NULL && *compteurAlerte > 0) {
+  if (*alerte == NULL && *iCompteurAlerte > 0) {
     printf("Erreur de reallocation memoire après la suppression.\n");
     exit(EXIT_FAILURE);
   }
@@ -335,12 +331,11 @@ void supprimerAlerte(Alerte **alerte, int *compteurAlerte) {
 /*  LES UNITES */
 
 int genererCodeUnite() {
-  int nombreGenere = 0;
-  int existeAlerte = 0;
+  int iNombreGenere = 0;
 
-  nombreGenere = rand() % 50002 + 50001;
+  iNombreGenere = rand() % 50002 + 50001;
 
-  return nombreGenere;
+  return iNombreGenere;
 }
 
 char * moyenDeplacement() {
@@ -391,12 +386,12 @@ char * moyenDeplacement() {
 }
 
 char * niveauDisponibilite() {
-  char *ptrNiveauDisponibilite = NULL;
+  char *cPtrNiveauDisponibilite = NULL;
   int iChoix = 0;
 
-  ptrNiveauDisponibilite = malloc(21 * sizeof(char));
+  cPtrNiveauDisponibilite = malloc(21 * sizeof(char));
 
-  if (ptrNiveauDisponibilite == NULL) {
+  if (cPtrNiveauDisponibilite == NULL) {
     printf("Erreur d'allocation memoire pour le niveau de dispinibilite\n");
     exit(EXIT_FAILURE);
   }
@@ -420,13 +415,13 @@ char * niveauDisponibilite() {
 
     switch (iChoix) {
       case 1:
-        ptrNiveauDisponibilite = "ACTIVE\n";
+        cPtrNiveauDisponibilite = "ACTIVE\n";
         break;
       case 2:
-        ptrNiveauDisponibilite = "EN REPOS\n";
+        cPtrNiveauDisponibilite = "EN REPOS\n";
         break;
         case 3:
-        ptrNiveauDisponibilite = "EN REAPPROVISIONNEMENT\n";
+        cPtrNiveauDisponibilite = "EN REAPPROVISIONNEMENT\n";
         break;
         default:
         printf("La saisie n'est pas correcte.\n");
@@ -434,16 +429,16 @@ char * niveauDisponibilite() {
     }
   } while (iChoix > 3);
 
-  return ptrNiveauDisponibilite;
+  return cPtrNiveauDisponibilite;
 }
 
 char * statutUnite() {
-  char *ptrStatutUnite = NULL;
+  char *cPtrStatutUnite = NULL;
   int iChoix = 0;
 
-  ptrStatutUnite  = malloc(21 * sizeof(char));
+  cPtrStatutUnite  = malloc(21 * sizeof(char));
 
-  if (ptrStatutUnite  == NULL) {
+  if (cPtrStatutUnite  == NULL) {
     printf("Erreur d'allocation memoire pour le statu unite\n");
     exit(EXIT_FAILURE);
   }
@@ -467,13 +462,13 @@ char * statutUnite() {
 
     switch (iChoix) {
       case 1:
-        ptrStatutUnite  = "ACTIVE\n";
+        cPtrStatutUnite  = "ACTIVE\n";
         break;
       case 2:
-        ptrStatutUnite  = "EN REPOS\n";
+        cPtrStatutUnite  = "EN REPOS\n";
         break;
         case 3:
-        ptrStatutUnite  = "EN REAPPROVISIONNEMENT\n";
+        cPtrStatutUnite  = "EN REAPPROVISIONNEMENT\n";
         break;
         default:
         printf("La saisie n'est pas correcte.\n");
@@ -481,53 +476,52 @@ char * statutUnite() {
     }
   } while (iChoix > 3);
 
-  return ptrStatutUnite ;
+  return cPtrStatutUnite ;
 }
 
-void creerUnite(Unites **unite, int *compteurUnite) {
-  char tmpChaine[LIEU_TAILLE];
+void creerUnite(Unites **unite, int *iCompteurUnite) {
   char sBuffer[TAILLE_BUFFER];
-  int tmpNombre = 0;
-  char *ptrStatutUnite = NULL;
-  char *ptrMoyenDeplacement = NULL;
-  char *ptrNiveauDisponibilite = NULL;
+  int iTmpNombre = 0;
+  char *cPtrStatutUnite = NULL;
+  char *cPtrMoyenDeplacement = NULL;
+  char *cPtrNiveauDisponibilite = NULL;
   int i;
 
-  i = *compteurUnite;
+  i = *iCompteurUnite;
 
   printf("Code d'alerte :\n");
-  tmpNombre = genererCodeUnite();
-  (*unite)[i].iCode = tmpNombre;
+  iTmpNombre = genererCodeUnite();
+  (*unite)[i].iCode = iTmpNombre;
 
   printf("Nom d'unité :\n");
-  fgets(tmpChaine, LIEU_TAILLE, stdin);
-  strcpy((*unite)[i].cNom, tmpChaine);
+  fgets(sBuffer, TAILLE_BUFFER, stdin);
+  strcpy((*unite)[i].cNom, sBuffer);
 
   printf("Moyen de deplacement :\n");
-  ptrMoyenDeplacement = moyenDeplacement();
-  strcpy((*unite)[i].cMoyenDeplacement, ptrMoyenDeplacement);
+  cPtrMoyenDeplacement = moyenDeplacement();
+  strcpy((*unite)[i].cMoyenDeplacement, cPtrMoyenDeplacement);
 
   printf("Niveau de disponobilité :\n");
-  ptrNiveauDisponibilite = moyenDeplacement();
-  strcpy((*unite)[i].cNiveauDisponibilite, ptrNiveauDisponibilite);
+  cPtrNiveauDisponibilite = moyenDeplacement();
+  strcpy((*unite)[i].cNiveauDisponibilite, cPtrNiveauDisponibilite);
 
   printf("Statut :\n");
-  ptrStatutUnite = statutUnite();
-  strcpy((*unite)[i].cStatut, ptrStatutUnite);
+  cPtrStatutUnite = statutUnite();
+  strcpy((*unite)[i].cStatut, cPtrStatutUnite);
 
   printf("Base :\n");
-  fgets(tmpChaine, LIEU_TAILLE, stdin);
-  strcpy((*unite)[i].cBase, tmpChaine);
+  fgets(sBuffer, TAILLE_BUFFER, stdin);
+  strcpy((*unite)[i].cBase, sBuffer);
 
   printf("Unité a été bien crée avec le code suivant : %d\n", (*unite)[i].iCode);
 }
 
-void afficherUneUnite(Unites **unite, int *compteurUnite) {
+void afficherUneUnite(Unites **unite, int *iCompteurUnite) {
   int i = 0;
   int iCodeDonne = 0;
-  int existeUnite = 0;
+  int iExisteUnite = 0;
 
-  if (*compteurUnite == 0) {
+  if (*iCompteurUnite == 0) {
     printf("Aucune unité n'a été enregistrée\n");
     return;
   }
@@ -535,53 +529,52 @@ void afficherUneUnite(Unites **unite, int *compteurUnite) {
   printf("Donnez le code d'unité :\n");
   scanf("%d%*c", &iCodeDonne);
 
-  for (i = 0; i < (*compteurUnite); i++) {
+  for (i = 0; i < (*iCompteurUnite); i++) {
     if (iCodeDonne == (*unite)[i].iCode) {
       printf("\n");
       printf("Code d'unité : %d\n", (*unite)[i].iCode);
       printf("Nom d'unité : %s", (*unite)[i].cNom);
       printf("Moyen de deplacement : %s", (*unite)[i].cMoyenDeplacement);
       printf("Disponobilité : %s", (*unite)[i].cNiveauDisponibilite);
-      printf("Satut : %d\n", (*unite)[i].cStatut);
+      printf("Satut : %s\n", (*unite)[i].cStatut);
       printf("Base : %s", (*unite)[i].cBase);
-      existeUnite = 1;
+      iExisteUnite = 1;
     }
   }
-  if (!existeUnite)
+  if (!iExisteUnite)
     printf("Unité avec le code %d n'a pas été trouvée.\n", iCodeDonne);
 }
 
-void afficherToutesUnites(Unites **unite, int *compteurUnite) {
+void afficherToutesUnites(Unites **unite, int *iCompteurUnite) {
   int i = 0;
 
-   if (*compteurUnite == 0) {
+   if (*iCompteurUnite == 0) {
     printf("Aucune alerte n'a été enregistrée\n");
     return;
   }
 
-   for (i = 0; i < *compteurUnite; i++) {
+   for (i = 0; i < *iCompteurUnite; i++) {
     printf("\n");
     printf("Code d'unité : %d\n", (*unite)[i].iCode);
     printf("Nom d'unité : %s", (*unite)[i].cNom);
     printf("Moyen de deplacement : %s", (*unite)[i].cMoyenDeplacement);
     printf("Disponobilité : %s", (*unite)[i].cNiveauDisponibilite);
-    printf("Statut : %d\n", (*unite)[i].cStatut);
+    printf("Statut : %s\n", (*unite)[i].cStatut);
     printf("Base : %s", (*unite)[i].cBase);
   }
 }
 
-void modifierUnite(Unites **unite, int *compteurUnite) {
+void modifierUnite(Unites **unite, int *iCompteurUnite) {
   int i = 0;
-  int existeUnite = 0;
-  char *ptrStatutUnite = NULL;
-  char *ptrMoyenDeplacement = NULL;
-  char *ptrNiveauDisponibilite = NULL;
-
+  int iExisteUnite = 0;
+  char *cPtrStatutUnite = NULL;
+  char *cPtrMoyenDeplacement = NULL;
+  char *cPtrNiveauDisponibilite = NULL;
+  char sBuffer[TAILLE_BUFFER];
   int iCodeDonne = 0;
-  char tmpChaine[LIEU_TAILLE];
-  int tmpNombre = 0;
+  int iTmpNombre = 0;
 
-   if (*compteurUnite == 0) {
+   if (*iCompteurUnite == 0) {
     printf("Aucune unité n'a été enregistrée\n");
     return;
   }
@@ -589,46 +582,46 @@ void modifierUnite(Unites **unite, int *compteurUnite) {
   printf("Donnez le code d'unité :\n");
   scanf("%d%*c", &iCodeDonne);
 
-   for (i = 0; i < *compteurUnite; i++) {
+   for (i = 0; i < *iCompteurUnite; i++) {
     if (iCodeDonne == (*unite)[i].iCode) {
       printf("Code d'unité à modifier: %d\n", (*unite)[i].iCode);
 
       printf("Nom d'unité :\n");
-      fgets(tmpChaine, LIEU_TAILLE, stdin);
-      strcpy((*unite)[i].cNom, tmpChaine);
+      fgets(sBuffer, TAILLE_BUFFER, stdin);
+      strcpy((*unite)[i].cNom, sBuffer);
 
       printf("Moyen de deplacement :\n");
-      ptrMoyenDeplacement = moyenDeplacement();
-      strcpy((*unite)[i].cMoyenDeplacement, ptrMoyenDeplacement);
+      cPtrMoyenDeplacement = moyenDeplacement();
+      strcpy((*unite)[i].cMoyenDeplacement, cPtrMoyenDeplacement);
 
       printf("Disponobilité :\n");
-      ptrNiveauDisponibilite = niveauDisponibilite();
-      strcpy((*unite)[i].cNiveauDisponibilite, ptrNiveauDisponibilite);
+      cPtrNiveauDisponibilite = niveauDisponibilite();
+      strcpy((*unite)[i].cNiveauDisponibilite, cPtrNiveauDisponibilite);
 
       printf("Statut :\n");
-      ptrStatutUnite = statutUnite();
-      strcpy((*unite)[i].cStatut, ptrStatutUnite);
+      cPtrStatutUnite = statutUnite();
+      strcpy((*unite)[i].cStatut, cPtrStatutUnite);
 
       printf("Base :\n");
-      fgets(tmpChaine, LIEU_TAILLE, stdin);
-      strcpy((*unite)[i].cBase, tmpChaine);
+      fgets(sBuffer, TAILLE_BUFFER, stdin);
+      strcpy((*unite)[i].cBase, sBuffer);
 
-      existeUnite = 1;
+      iExisteUnite = 1;
     }
   }
-  if (!existeUnite) {
+  if (!iExisteUnite) {
     printf("Unité avec le code %d n'a pas été trouvée.\n", iCodeDonne);
   } else {
     printf("Unité avec le code %d a été bien modifiée.\n", iCodeDonne);
   }
 }
 
-void supprimerUnite(Unites **unite, int *compteurUnite) {
+void supprimerUnite(Unites **unite, int *iCompteurUnite) {
   int iCodeDonne = 0;
   int i = 0;
   int j = 0;
 
-  if (*compteurUnite == 0) {
+  if (*iCompteurUnite == 0) {
    printf("Aucune unité n'a été enregistrée\n");
    return;
   }
@@ -636,15 +629,15 @@ void supprimerUnite(Unites **unite, int *compteurUnite) {
   printf("Donnez le code d'unité pour la suppression :\n");
   scanf("%d%*c", &iCodeDonne);
 
-  while (i < *compteurUnite && iCodeDonne != (*unite)[i].iCode) {
+  while (i < *iCompteurUnite && iCodeDonne != (*unite)[i].iCode) {
     i++;
   }
 
-  if (i == *compteurUnite) {
+  if (i == *iCompteurUnite) {
     printf("Unité n'a pas été trouvée.\n");
     return;
   } else {
-    for (j = i; j < (*compteurUnite); j++) {
+    for (j = i; j < (*iCompteurUnite); j++) {
         (*unite)[j].iCode = (*unite)[j+1].iCode;
         strcpy((*unite)[j].cNom, (*unite)[j+1].cNom);
         strcpy((*unite)[j].cMoyenDeplacement, (*unite)[j+1].cMoyenDeplacement);
@@ -654,11 +647,11 @@ void supprimerUnite(Unites **unite, int *compteurUnite) {
     }
   }
 
-  (*compteurUnite)--;
+  (*iCompteurUnite)--;
 
-  *unite = realloc(*unite, (*compteurUnite * sizeof(Unites)));
+  *unite = realloc(*unite, (*iCompteurUnite * sizeof(Unites)));
 
-  if (*unite == NULL && *compteurUnite > 0) {
+  if (*unite == NULL && *iCompteurUnite > 0) {
     printf("Erreur de reallocation memoire après la suppression.\n");
     exit(EXIT_FAILURE);
   }
