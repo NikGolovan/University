@@ -4,16 +4,25 @@
 #include "alerte.c"
 
 int main(int argc, char const *argv[]) {
-  int choix = 0;
-  int compteurAlerte = 0;
+  int iChoix = 0;
+  int iCompteurAlerte = 0;
+  int iCompteurUnite = 0;
   Alerte *alerte = NULL;
+  Unites *unite = NULL;
 
   srand(time(NULL));
 
-  alerte = malloc(TAILLE_INITIALE_DE_MALLOC * sizeof(Alerte));
+  alerte = malloc(TAILLE_INITIALE_DE_MALLOC_ALERTE  * sizeof(Alerte));
 
   if (alerte == NULL) {
-    printf("Erreur d'allocation mémoire\n");
+    printf("Erreur d'allocation mémoire pour alerte\n");
+    return(-1);
+  }
+
+  unite = malloc(TAILLE_INITIALE_DE_MALLOC_UNITE * sizeof(Unites));
+
+  if (unite == NULL) {
+    printf("Erreur d'allocation mémoire pour unite\n");
     return(-1);
   }
 
@@ -38,31 +47,31 @@ int main(int argc, char const *argv[]) {
     printf("║ -1 ║ Quitter                      ║\n");
     printf("╚════╩══════════════════════════════╝\n");
 
-    scanf("%d%*c", &choix);
+    scanf("%d%*c", &iChoix);
 
-    switch (choix) {
+    switch (iChoix) {
       case 1:
-        ajouterAlerte(&alerte, &compteurAlerte);
-        compteurAlerte++;
+        ajouterAlerte(&alerte, &iCompteurAlerte);
+        iCompteurAlerte++;
 
-        if (compteurAlerte >= TAILLE_INITIALE_DE_MALLOC) {
-          alerte = realloc(alerte, (compteurAlerte * sizeof(Alerte)));
+        if (iCompteurAlerte >= TAILLE_INITIALE_DE_MALLOC_ALERTE) {
+          alerte = realloc(alerte, (iCompteurAlerte * sizeof(Alerte)));
           printf("DEBUG: La mémoire a été realouée\n");
         }
-        printf("DEBUG: compteurAlerte après l'ajout : %d\n", compteurAlerte);
+        printf("DEBUG: compteurAlerte après l'ajout : %d\n", iCompteurAlerte);
         break;
       case 2:
-        afficherUneAlerte(&alerte, &compteurAlerte);
+        afficherUneAlerte(&alerte, &iCompteurAlerte);
         break;
       case 3:
-        afficherToutesAlertes(&alerte, &compteurAlerte);
+        afficherToutesAlertes(&alerte, &iCompteurAlerte);
         break;
       case 4:
-        modifierAlerte(&alerte, &compteurAlerte);
+        modifierAlerte(&alerte, &iCompteurAlerte);
         break;
       case 5:
-        supprimerAlerte(&alerte, &compteurAlerte);
-        printf("DEBUG: compteurAlerte après la suppression : %d\n", compteurAlerte);
+        supprimerAlerte(&alerte, &iCompteurAlerte);
+        printf("DEBUG: compteurAlerte après la suppression : %d\n", iCompteurAlerte);
         break;
       case -1:
         break;
@@ -70,8 +79,10 @@ int main(int argc, char const *argv[]) {
         printf("La saisie n'est pas correcte.\n");
         break;
     }
+  } while(iChoix != -1);
 
-  } while(choix != -1);
+  free(alerte);
+  free(unite);
 
   return 0;
 }
