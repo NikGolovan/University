@@ -8,7 +8,6 @@
 int genererCodeAlerte(/* Alerte **alerte, int *iCompteurAlerte */) {
   int iNombreGenere = 0;
   //int iExisteAlerte = 0;
-  // int i = 0;
 
   iNombreGenere = rand() % 50001;
 
