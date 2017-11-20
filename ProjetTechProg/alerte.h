@@ -6,13 +6,15 @@
 #define DESCRIPTION_TAILLE 150
 #define TAILLE_TYPE 21
 #define TAILLE_NIVEAU 21
-#define TAILLE_INITIALE_DE_MALLOC 3
-#define TAILLE_BUFFER 21
+#define TAILLE_INITIALE_DE_MALLOC_ALERTE 3
+#define TAILLE_INITIALE_DE_MALLOC_UNITE 3
+#define TAILLE_BUFFER 150
 
 #define TAILLE_MOYEN_DEPLACEMENT 21
 #define TAILLE_NIVEAU_DISPONIBILITE 21
 #define TAILLE_STATUT 21
 #define TAILLE_BASE 50
+#define TAILLE_NOM_UNITE 30
 
 typedef struct {
   int iCode;
@@ -32,10 +34,9 @@ char * typeAlerte();
 char * niveauAlerte();
 int genererCodeAlerte(/*Alerte **alerte, int *compteurAlerte*/);
 
-
 typedef struct {
   int iCode;
-  char cNom;
+  char cNom[TAILLE_NOM_UNITE];
   char cMoyenDeplacement[TAILLE_MOYEN_DEPLACEMENT];
   char cNiveauDisponibilite[TAILLE_NIVEAU_DISPONIBILITE];
   char cStatut[TAILLE_STATUT];
